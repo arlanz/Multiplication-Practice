@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+	  text-align: center;
+      }
+      #question {
+	  font-family: Arial;
+	  font-size: 200px;
+      }
+      #answer {
+	  font-size: 100px;
+      }
+      #start {
+	  font-size: 100px;
+      }
+      #restart {
+	  font-size: 100px;
+      }
+      #Timer {
+	  font-size: 50px
+      }
+    </style>
+    
+    <script src="Multiplication_Practice.js"></script>
+    
+  </head>
+  
+  <body>
+
+    <div id="wrong" hidden>
+      <span id="You_did">
+	You did
+      </span>
+      <span id="answer_wrong">
+      </span>
+      <span id="for">
+	for
+      </span>
+      <span id="Problem_1">
+	<!-- in code -->
+      </span>
+      <span id="Problem_Times">
+	&times;
+      </span>
+      <span id="Problem_2">
+	<!-- in code -->
+      </span>
+      <span id="Should_be">
+	. It should be
+      </span>
+      <span id="Answer">
+	<!-- in code -->
+      </span>
+      <button id="Next" onclick="Continue()">
+	Next
+      </button>
+    </div>
+    
+    <div id="question" hidden>
+
+      <span id="X">
+      </span>
+      <span id="Times">
+	&times;
+      </span>
+      <span id="Y">
+      </span>
+       <span id="Ending_#">
+       </span>
+       <span id="subtitle">
+       </span>
+    </div>
+    
+    <input id="answer" size="4" hidden
+	   onkeypress="if (event.key == 'Enter') Check_Answer()">
+
+    <button id="start" onclick="Start_Button()">
+      Start
+    </button>
+    <button id="restart" onclick="Start_Button()" hidden>
+      Try Again?
+    </button>
+
+    <div id="Timer">
+      <span id="It_took_you" hidden>
+       It took you
+      </span>
+      <span id="Minute_Number">
+	<!-- in code -->
+      </span>
+      <span id="Minutes" hidden>
+	minutes and
+     </span>
+      <span id="Second_number">
+	<!-- in code -->
+     </span>
+     <span id="Seconds" hidden>
+       seconds
+     </span>
+     
+    </div>
+    
+  </body>
+  
+</html>

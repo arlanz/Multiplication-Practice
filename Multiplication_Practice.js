@@ -1,4 +1,4 @@
-var Time, Min, Time_One, Time_Two, w, x, y, Questions_Asked;
+var Time, Min, Time_One, Time_Two, w, Mult_1, Mult_2, Questions_Asked, Answer, Input;
 
 /*
 commands
@@ -28,18 +28,36 @@ function Start_Button() {
     document.getElementById("Wrong2").textContent = "";
     document.getElementById("Times").hidden = false;
     document.getElementById("answer").focus();
-    document.getElementById("timer").hidden = true;
-    document.getElementById("timer3").hidden = true;
-    document.getElementById("timer2").textContent = "";
-    document.getElementById("timer5").hidden = true;
-    document.getElementById("timer4").textContent = "";
-    document.getElementById("timer").hidden = true;
-    document.getElementById("timer").textContext = ""
+    document.getElementById("Mult_1").textContent = "";
+    document.getElementById("Mult_2").textContent = "";
+    document.getElementbyId("wrong").hidden = true
+    //document.getElementbyId("").hidden = false
+    document.getElementById("It_took_you").hidden = true;
+    document.getElementById("Seconds").hidden = true;
+    document.getElementById("Minutes").hidden = true;
     Next_Question();
     Start_Timer();
     
 }
+function Hide() {
+    document.getElementById("question").hidden = true;
+    document.getElementById("answer").hidden = true;
+    document.getElementById("start").hidden = true;
+    document.getElementById("restart").hidden = true;
+    document.getElementById("Times").hidden = true;
+    document.getElementById("timer").hidden = true;
+    document.getElementById("timer3").hidden = true;
+    document.getElementById("timer5").hidden = true;
+    document.getElementById("timer").hidden = true;
+}
 
+function Show() {
+    document.getElementById("question").hidden = false;
+    document.getElementById("answer").hidden = false;
+    document.getElementById("Times").hidden = false;
+    document.getElementbyId("wrong").hidden = true;
+}
+    
 function Start_Timer() {
     Time_One = performance.now();
 }
@@ -63,59 +81,72 @@ function Converter() {
     }
     else {
 	Time = Math.round(Time)
-	document.getElementById("timer2").textContent = Time;
-	document.getElementById("timer4").textContent = Min;
+	document.getElementById("Second_number").textContent = Time;
+	document.getElementById("Minute_Number").textContent = Min;
     }
 }
 
 function Check_Answer() {
-    var z = x*y;
+    var Answer = Mult_1 * Mult_2;
     var Input = document.getElementById("answer").value;
     document.getElementById("answer").value = "";
-    if (Input == z && Input != "") {
+    if (Input == Answer && Input != "") {
 	Right_Answer();
     } else {
 	Wrong_Answer();
     }
 }
 
+function Wrong_Answer() {
+    //Turn_Red();
+    w = w+1;
+    Hide();
+    document.getElementbyId("answer_wrong").textContent = Input;
+    document.getElementbyId("Problem_1").textContent = Mult_1;
+    document.getElementbyId("Problem_2").textContent = Mult_2;
+    document.getElementbyId("Answer").textContent = Answer;
+    document.getElementbyId("wrong").hidden = false;
+
+}
+function Continue() {
+    Show();
+    document.getElementbyId("wrong").hidden = true;
+    Next_Question();
+}
+
 function Right_Answer() {
-    //Turn_Green();
+    // Turn_Green();
     Next_Question();
 }
 
 function Next_Question() {
     if (Questions_Asked < 20){
-	x = Math.floor(Math.random() * 13);
-        y = Math.floor(Math.random() * 13);
-	document.getElementById("X").textContent = x;
-	document.getElementById("Y").textContent = y;
+	Mult_1 = Math.floor(Math.random() * 13);
+        Mult_2 = Math.floor(Math.random() * 13);
+	document.getElementById("X").textContent = Mult_1;
+	document.getElementById("Y").textContent = Mult_2;
 	Questions_Asked = Questions_Asked + 1;
     } else {
 	Show_Results();
     }
 }
-function Wrong_Answer() {
-    // Turn_Red();
-    w = w+1;
-    Next_Question();
-}
 function Show_Results() {
     Stop_Timer();
-    document.getElementById("X").textContent = "";
-    document.getElementById("Y").textContent = "";
+    document.getElementById("Mult_1").textContent = "";
+    document.getElementById("Mult_2").textContent = "";
     document.getElementById("Times").hidden = true;
     document.getElementById("answer").hidden = true;
     document.getElementById("restart").hidden = false;
+    document.getElementbyId("wrong").hidden = true
     //document.getElementbyId("").hidden = false
-    document.getElementById("timer").hidden = false;
-    document.getElementById("timer3").hidden = false;
-    document.getElementById("timer5").hidden = false;
+    document.getElementById("It_took_you").hidden = false;
+    document.getElementById("Seconds").hidden = false;
+    document.getElementById("Minutes").hidden = false;
     if (w>0) {
-	document.getElementById("Wrong").textContent = w;
-	document.getElementById("Wrong2").textContent = "wrong";
+	document.getElementById("Ending_#").textContent = w;
+	document.getElementById("subtitle").textContent = "wrong";
     } else {
-	document.getElementById("Wrong").textContent = "Perfect!"
+	document.getElementById("subtitle").textContent = "Perfect!"
 
     }
 }
