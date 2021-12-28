@@ -79,13 +79,14 @@ function Check_Answer() {
     Answer = Mult_1 * Mult_2;
     Input = document.getElementById("answer").value;
     document.getElementById("answer").value = "";
-    if (Input == Answer && Input != "") {
-	Right_Answer();
-    } else {
-	Wrong_Answer();
+    if (Input !== "") {
+	if (Input == Answer) {
+	    Right_Answer();
+	} else {
+	    Wrong_Answer();
+	}
     }
 }
-
 function Wrong_Answer() {
     //Turn_Red();
     w = w+1;
