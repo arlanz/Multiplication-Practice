@@ -109,7 +109,7 @@ function Right_Answer() {
 }
 
 function Next_Question() {
-    if (Questions_Asked < 2){
+    if (Questions_Asked < 20){
 	Mult_1 = Math.floor(Math.random() * 13);
         Mult_2 = Math.floor(Math.random() * 13);
 	document.getElementById("Mult_1").textContent = Mult_1;
