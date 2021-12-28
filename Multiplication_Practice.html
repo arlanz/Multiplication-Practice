@@ -5,9 +5,22 @@
       body {
 	  text-align: center;
       }
+      #wrong {
+          font-size: 100px;
+      }
+      #Next {
+          font-size: 100px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      
       #question {
 	  font-family: Arial;
 	  font-size: 200px;
+      }
+      #wrong_result {
+          font-size: 100px
       }
       #answer {
 	  font-size: 100px;
@@ -29,19 +42,52 @@
   
   <body>
 
-
+    <div id="wrong" hidden>
+      <span id="You_did">
+	You did
+      </span>
+      <span id="answer_wrong">
+      </span>
+      <span id="for">
+	for
+      </span>
+      <span id="Problem_1">
+	<!-- in code -->
+      </span>
+      <span id="Problem_Times">
+	&times;
+      </span>
+      <span id="Problem_2">
+	<!-- in code -->
+      </span>.
+      <span id="Should_be">
+	It should be
+      </span>
+      <span id="Answer">
+	<!-- in code -->
+      </span>.
+      <button id="Next" onclick="Continue()">
+	Next
+      </button>
+    </div>
+    
     <div id="question" hidden>
 
-      <span id="X">
+      <span id="Mult_1">
       </span>
       <span id="Times">
 	&times;
       </span>
-      <span id="Y">
+      <span id="Mult_2">
       </span>
-       <span id="Wrong">
+    </div>
+    
+    <div id="wrong_result" hidden>
+      <span id="you_got">
+      </span>
+       <span id="Ending_#">
        </span>
-       <span id="Wrong2">
+       <span id="subtitle">
        </span>
     </div>
     
@@ -55,19 +101,21 @@
       Try Again?
     </button>
 
-    <div id="Timer">
-      <span id="timer" hidden>
+    <div id="Timer" hidden>
+      <span id="It_took_you" >
        It took you
       </span>
-      <span id="timer4">
+      <span id="Minute_Number">
+	<!-- in code -->
       </span>
-      <span id="timer5" hidden>
+      <span id="Minutes" >
 	minutes and
      </span>
-     <span id="timer2">
+      <span id="Second_number">
+	<!-- in code -->
      </span>
-     <span id="timer3" hidden>
-       seconds
+     <span id="Seconds" >
+       seconds.
      </span>
      
     </div>
@@ -75,4 +123,3 @@
   </body>
   
 </html>
-
