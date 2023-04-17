@@ -1,4 +1,6 @@
-var Time, Min, Time_One, Time_Two, w, Mult_1, Mult_2, Questions_Asked, Answer, Input;
+var Start_Time, End_Time, Wrong_Answers, Factor_1, Factor_2, Questions_Asked, Answer, Input;
+const Time = [0,0];
+
 
 /*
 commands
@@ -17,10 +19,11 @@ one argument: function. next time browser draws run function.
 
 
 function Start_Button() {
-    w = 0;
+    Wrong_Answers = 0;
     Questions_Asked = 0;
-    Min = 0
-    Hide()
+    Time[0] = 0;
+    Time[1] = 0;
+    Hide();
     document.getElementById("question").hidden = false;
     document.getElementById("answer").hidden = false;
     document.getElementById("Times").hidden = false;
@@ -48,35 +51,34 @@ function Show() {
 }
     
 function Start_Timer() {
-    Time_One = performance.now();
+    Start_Time = performance.now();
 }
 
 function Stop_Timer() {
-    Time_Two = performance.now();
+    End_Time = performance.now();
     Check_Time();
 }
 
 function Check_Time() {
-    Time = Time_Two - Time_One;
-    Time = Time / 1000;
+    Time[1] = (End_Time - Start_Time)/1000;
     Converter();
 }
 
 function Converter() {
-    if (Time > 60) {
-	Time = Time - 60;
-	Min = Min + 1;
+    if (Time[1] > 60) {
+	Time[1] = Time[1] - 60;
+	Time[0] = Time[0] + 1;
 	Converter();
     }
     else {
-	Time = Math.round(Time)
-	document.getElementById("Second_number").textContent = Time;
-	document.getElementById("Minute_Number").textContent = Min;
+	Time[1] = Math.round(Time[1])
+	document.getElementById("Second_number").textContent = Time[1];
+	document.getElementById("Minute_Number").textContent = Time[0];
     }
 }
 
 function Check_Answer() {
-    Answer = Mult_1 * Mult_2;
+    Answer = Factor_1 * Factor_2;
     Input = document.getElementById("answer").value;
     document.getElementById("answer").value = "";
     if (Input !== "") {
@@ -89,11 +91,11 @@ function Check_Answer() {
 }
 function Wrong_Answer() {
     //Turn_Red();
-    w = w+1;
+    Wrong_Answers = Wrong_Answers + 1;
     Hide();
     document.getElementById("answer_wrong").textContent = Input;
-    document.getElementById("Problem_1").textContent = Mult_1;
-    document.getElementById("Problem_2").textContent = Mult_2;
+    document.getElementById("Problem_1").textContent = Factor_1;
+    document.getElementById("Problem_2").textContent = Factor_2;
     document.getElementById("Answer").textContent = Answer;
     document.getElementById("wrong").hidden = false;
 
@@ -110,11 +112,11 @@ function Right_Answer() {
 }
 
 function Next_Question() {
-    if (Questions_Asked < 20){
-	Mult_1 = Math.floor(Math.random() * 13);
-        Mult_2 = Math.floor(Math.random() * 13);
-	document.getElementById("Mult_1").textContent = Mult_1;
-	document.getElementById("Mult_2").textContent = Mult_2;
+    if (Questions_Asked < 2){
+	Factor_1 = Math.floor(Math.random() * 13);
+        Factor_2 = Math.floor(Math.random() * 13);
+	document.getElementById("Factor_1").textContent = Factor_1;
+	document.getElementById("Factor_2").textContent = Factor_2;
 	Questions_Asked = Questions_Asked + 1;
 	document.getElementById("answer").focus();
     } else {
@@ -129,11 +131,12 @@ function Show_Results() {
     document.getElementById("wrong").hidden = true
     document.getElementById("answer").hidden = true;
     document.getElementById("Timer").hidden = false;
-    if (w>0) {
+    if (Wrong_Answers>0) {
 	document.getElementById("you_got").textContent = "You got";
-	document.getElementById("Ending_#").textContent = w;
-	document.getElementById("subtitle").textContent = "wrong.";
+	document.getElementById("Ending_#").textContent = Wrong_Answers;
+	document.getElementById("subtitle").textContent = "wrong";
     } else {
+	document.getElementById("you_got").textContent = "";
 	document.getElementById("Ending_#").textContent = "";
 	document.getElementById("subtitle").textContent = "Perfect!"
 
