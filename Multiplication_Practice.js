@@ -1,6 +1,12 @@
 var Start_Time, End_Time, Wrong_Answers, Factor_1, Factor_2, Questions_Asked, Answer, Input;
 const Time = [0,0];
-
+var spans = document.getElementsByTagName('span');
+var minimum = 0;
+var valid_minimum = true;
+var maximum = 12;
+var valid_maximum = true;
+var question_number = 20;
+var valid_question_number = true;
 
 /*
 commands
@@ -19,35 +25,44 @@ one argument: function. next time browser draws run function.
 
 
 function Start_Button() {
-    Wrong_Answers = 0;
-    Questions_Asked = 0;
-    Time[0] = 0;
-    Time[1] = 0;
-    Hide();
-    document.getElementById("question").hidden = false;
-    document.getElementById("answer").hidden = false;
-    document.getElementById("Times").hidden = false;
-    document.getElementById("answer").focus();
-    //document.getElementById("").hidden = false;
-    Next_Question();
-    Start_Timer();
+    if (minimum > maximum || !valid_minimum || !valid_maximum || !valid_question_number)
+    {
+	document.getElementById("guidelines").hidden = false;
+    }
+    else
+    {
+	Wrong_Answers = 0;
+	Questions_Asked = 0;
+	Time[0] = 0;
+	Time[1] = 0;
+	Hide();
+	document.getElementById("question").hidden = false;
+	document.getElementById("answer").hidden = false;
+	document.getElementById("Times").hidden = false;
+	document.getElementById("answer").focus();
+	//document.getElementById("").hidden = false;
+	Next_Question();
+	Start_Timer();
+    }
     
 }
 function Hide() {
-    document.getElementById("wrong").hidden = true;
+    document.getElementById("explanation").hidden = true;
     document.getElementById("question").hidden = true;
     document.getElementById("wrong_result").hidden = true;
     document.getElementById("answer").hidden = true;
-    document.getElementById("start").hidden = true;
     document.getElementById("restart").hidden = true;
+    document.getElementById("start").hidden = true;
+    document.getElementById("reset").hidden = true;
     document.getElementById("Timer").hidden = true;
+    document.getElementById("settings").hidden = true;
 }
 
-function Show() {
+function Back_To_Question() {
     document.getElementById("question").hidden = false;
     document.getElementById("answer").hidden = false;
     document.getElementById("Times").hidden = false;
-    document.getElementById("wrong").hidden = true;
+    document.getElementById("explanation").hidden = true;
 }
     
 function Start_Timer() {
@@ -97,12 +112,12 @@ function Wrong_Answer() {
     document.getElementById("Problem_1").textContent = Factor_1;
     document.getElementById("Problem_2").textContent = Factor_2;
     document.getElementById("Answer").textContent = Answer;
-    document.getElementById("wrong").hidden = false;
+    document.getElementById("explanation").hidden = false;
 
 }
 function Continue() {
-    Show();
-    document.getElementById("wrong").hidden = true;
+    Back_To_Question();
+    document.getElementById("explanation").hidden = true;
     Next_Question();
 }
 
@@ -112,9 +127,9 @@ function Right_Answer() {
 }
 
 function Next_Question() {
-    if (Questions_Asked < 2){
-	Factor_1 = Math.floor(Math.random() * 13);
-        Factor_2 = Math.floor(Math.random() * 13);
+    if (Questions_Asked < question_number){
+	Factor_1 = Math.floor(Math.random() * (maximum-minimum+1) + minimum);
+	Factor_2 = Math.floor(Math.random() * (maximum-minimum+1) + minimum);
 	document.getElementById("Factor_1").textContent = Factor_1;
 	document.getElementById("Factor_2").textContent = Factor_2;
 	Questions_Asked = Questions_Asked + 1;
@@ -127,8 +142,9 @@ function Show_Results() {
     Stop_Timer();
     document.getElementById("question").hidden = true;
     document.getElementById("wrong_result").hidden = false;
+    document.getElementById("reset").hidden = false;
     document.getElementById("restart").hidden = false;
-    document.getElementById("wrong").hidden = true
+    document.getElementById("explanation").hidden = true
     document.getElementById("answer").hidden = true;
     document.getElementById("Timer").hidden = false;
     if (Wrong_Answers>0) {
@@ -140,5 +156,51 @@ function Show_Results() {
 	document.getElementById("Ending_#").textContent = "";
 	document.getElementById("subtitle").textContent = "Perfect!"
 
+    }
+}
+function Reset() {
+    Hide();
+    document.getElementById("start").hidden = false;
+    document.getElementById("settings").hidden = false;
+    document.getElementById("guidelines").hidden = true;
+}
+function Change_Minimum() {
+    let temp = document.getElementById("new_min").value;
+    temp = Number(temp);
+    if((temp >= 0 || temp <= 0))
+    {
+	valid_minimum = true;
+	minimum = temp;   
+    }
+    else
+    {
+	valid_minimum = false;
+    }
+}
+
+function Change_Maximum() {
+    let temp = document.getElementById("new_max").value;
+    temp = Number(temp);
+    if((temp >= 0 || temp <= 0))
+    {
+	valid_maximum = true;
+	maximum = temp;   
+    }
+    else
+    {
+	valid_maximum = false;
+    }
+}
+function Change_Question_Number() {
+    let temp = document.getElementById("question_num").value;
+    temp = Number(temp);
+    if(temp >= 1 && Number.isInteger(temp))
+    {
+	valid_question_number = true;
+	question_number = temp;   
+    }
+    else
+    {
+	valid_question_number = false;
     }
 }

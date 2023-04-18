@@ -5,7 +5,7 @@
       body {
 	  text-align: center;
       }
-      #wrong {
+      #wrong_result {
           font-size: 100px;
       }
       #Next {
@@ -19,16 +19,13 @@
 	  font-family: Arial;
 	  font-size: 200px;
       }
-      #wrong_result {
+      #explanation {
           font-size: 100px
       }
       #answer {
 	  font-size: 100px;
       }
-      #start {
-	  font-size: 100px;
-      }
-      #restart {
+      button {
 	  font-size: 100px;
       }
       #Timer {
@@ -36,13 +33,13 @@
       }
     </style>
     
-    <script src="file:///Users/arlan/Desktop/Multiplication%20Practice/Multiplication-Practice-master/Multiplication_Practice.js"></script>
+    <script src="file:///Users/arlan/Desktop//Multiplication-Practice/Multiplication_Practice.js"></script>
     
   </head>
   
   <body>
 
-    <div id="wrong" hidden>
+    <div id="explanation" hidden>
       <span id="You_did">
 	You did
       </span>
@@ -72,7 +69,6 @@
     </div>
     
     <div id="question" hidden>
-
       <span id="Factor_1">
       </span>
       <span id="Times">
@@ -94,13 +90,6 @@
     <input id="answer" size="4" hidden
 	   onkeypress="if (event.key == 'Enter') Check_Answer()">
 
-    <button id="start" onclick="Start_Button()">
-      Start
-    </button>
-    <button id="restart" onclick="Start_Button()" hidden>
-      Try Again?
-    </button>
-
     <div id="Timer" hidden>
       <span id="It_took_you" >
        It took you
@@ -117,9 +106,51 @@
      <span id="Seconds" >
        seconds.
      </span>
-     
     </div>
+
+    <div id="buttons">
+    <button id="start" onclick="Start_Button()">
+      Start
+    </button>
+    <button id="restart" onclick="Start_Button()" hidden>
+      Restart
+    </button>
+    <button id="reset" onclick="Reset()" hidden>
+      Reset
+    </button>
+    </div>
+
+    <div id="settings">
+      <div id="minimum">
+	<span id="new_minimum: ">
+	 Minimum:  
+	</span>
+	 <input id="new_min" size="4"
+	   oninput="Change_Minimum()" value="0">
+      </div>
+            
+      <div id="maximum">
+	<span id="new_maximum: ">
+	 Maximum:  
+	</span>
+	 <input id="new_max" size="4"
+	   oninput="Change_Maximum()" value="12">
+      </div>
+      <div>
+	<span>
+	 Number of questions:
+	</span>
+	 <input id="question_num" size="4"
+	   oninput="Change_Question_Number()" value="20">
+      </div>
     
+      <div id="guidelines" hidden>
+	Make sure both minimum
+	and maximum are all the
+	boxes are numbers, that
+	you have to answer at least
+	one question, and that the minimum
+	is less than the maximum
   </body>
   
 </html>
