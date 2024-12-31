@@ -167,7 +167,7 @@ function Reset() {
 function Change_Minimum() {
     let temp = document.getElementById("new_min").value;
     temp = Number(temp);
-    if((temp >= 0 || temp <= 0))
+    if((temp >= 0 || temp <= 0) && Number.isInteger(temp))
     {
 	valid_minimum = true;
 	minimum = temp;   
@@ -181,7 +181,7 @@ function Change_Minimum() {
 function Change_Maximum() {
     let temp = document.getElementById("new_max").value;
     temp = Number(temp);
-    if((temp >= 0 || temp <= 0))
+    if((temp >= 0 || temp <= 0) && Number.isInteger(temp))
     {
 	valid_maximum = true;
 	maximum = temp;   
